@@ -38,7 +38,7 @@ public class LoaderService {
             this.output.append(location.getName()).append(",Wasser,");
             this.output.append(extracted.get(3).replace('|', ',')).append("\n");
         } else {
-            System.err.println(location.getUrl());
+            appendWithoutRainData(location, extracted);
         }
     }
 
@@ -47,9 +47,9 @@ public class LoaderService {
         String page = "https://www.kitereisen.tv/";
 
         // rain missing
-//        this.locations.add(new Location("Romo", rest + "roemoe-daenemark/"));
-//        this.locations.add(new Location("Tarifa", rest + "tarifa/"));
-//        this.locations.add(new Location("Mallorca", rest + "mallorca/"));
+        this.locations.add(new Location("Romo", rest + "roemoe-daenemark/"));
+        this.locations.add(new Location("Tarifa", rest + "tarifa/"));
+        this.locations.add(new Location("Mallorca", rest + "mallorca/"));
 
         // no data
 //      this.locations.add(new Location("Oahu", rest + "oahu-hawaii/"));
@@ -132,6 +132,16 @@ public class LoaderService {
         this.locations.add(new Location("Overberg", page + "overberg-besten-kitespots-kitesurfen/"));
         this.locations.add(new Location("Djerba", rest + "djerba/"));
         this.locations.add(new Location("Zarzis", rest + "zarzis-tunesien/"));
+    }
+
+    private void appendWithoutRainData(Location location, List<String> extracted) {
+        this.output.append(location.getName()).append(",Wind,");
+        this.output.append(extracted.get(0).replace('|', ',')).append("\n");
+        this.output.append(location.getName()).append(",Luft,");
+        this.output.append(extracted.get(1).replace('|', ',')).append("\n");
+        this.output.append(location.getName()).append(",Wasser,");
+        this.output.append(extracted.get(2).replace('|', ',')).append("\n");
+        System.err.println(location.getUrl());
     }
 
 }
